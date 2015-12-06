@@ -1,0 +1,52 @@
+
+package introsde.assignment.soap.ws;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlType;
+
+
+/**
+ * <p>Java class for readPersonMeasureResponse complex type.
+ * 
+ * <p>The following schema fragment specifies the expected content contained within this class.
+ * 
+ * <pre>
+ * &lt;complexType name="readPersonMeasureResponse">
+ *   &lt;complexContent>
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       &lt;sequence>
+ *         &lt;element name="measureValue" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *       &lt;/sequence>
+ *     &lt;/restriction>
+ *   &lt;/complexContent>
+ * &lt;/complexType>
+ * </pre>
+ * 
+ * 
+ */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "readPersonMeasureResponse", propOrder = {
+    "measureValue"
+})
+public class ReadPersonMeasureResponse {
+
+    protected int measureValue;
+
+    /**
+     * Gets the value of the measureValue property.
+     * 
+     */
+    public int getMeasureValue() {
+        return measureValue;
+    }
+
+    /**
+     * Sets the value of the measureValue property.
+     * 
+     */
+    public void setMeasureValue(int value) {
+        this.measureValue = value;
+    }
+
+}
