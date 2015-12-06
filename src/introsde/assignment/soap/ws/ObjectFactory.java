@@ -31,19 +31,21 @@ public class ObjectFactory {
     private final static QName _SavePersonMeasure_QNAME = new QName("http://ws.soap.assignment.introsde/", "savePersonMeasure");
     private final static QName _SavePersonMeasureResponse_QNAME = new QName("http://ws.soap.assignment.introsde/", "savePersonMeasureResponse");
     private final static QName _DeletePerson_QNAME = new QName("http://ws.soap.assignment.introsde/", "deletePerson");
+    private final static QName _CreateFullPerson_QNAME = new QName("http://ws.soap.assignment.introsde/", "createFullPerson");
+    private final static QName _CreateFullPersonResponse_QNAME = new QName("http://ws.soap.assignment.introsde/", "createFullPersonResponse");
     private final static QName _CreatePersonResponse_QNAME = new QName("http://ws.soap.assignment.introsde/", "createPersonResponse");
-    private final static QName _GetPeopleList_QNAME = new QName("http://ws.soap.assignment.introsde/", "getPeopleList");
     private final static QName _ReadPersonMeasureResponse_QNAME = new QName("http://ws.soap.assignment.introsde/", "readPersonMeasureResponse");
     private final static QName _UpdatePerson_QNAME = new QName("http://ws.soap.assignment.introsde/", "updatePerson");
     private final static QName _ParseException_QNAME = new QName("http://ws.soap.assignment.introsde/", "ParseException");
     private final static QName _ReadPersonMeasure_QNAME = new QName("http://ws.soap.assignment.introsde/", "readPersonMeasure");
     private final static QName _ReadPerson_QNAME = new QName("http://ws.soap.assignment.introsde/", "readPerson");
-    private final static QName _GetPeopleListResponse_QNAME = new QName("http://ws.soap.assignment.introsde/", "getPeopleListResponse");
+    private final static QName _ReadPersonList_QNAME = new QName("http://ws.soap.assignment.introsde/", "readPersonList");
     private final static QName _DeletePersonResponse_QNAME = new QName("http://ws.soap.assignment.introsde/", "deletePersonResponse");
     private final static QName _ReadPersonHistory_QNAME = new QName("http://ws.soap.assignment.introsde/", "readPersonHistory");
     private final static QName _ReadPersonResponse_QNAME = new QName("http://ws.soap.assignment.introsde/", "readPersonResponse");
     private final static QName _UpdatePersonMeasureResponse_QNAME = new QName("http://ws.soap.assignment.introsde/", "updatePersonMeasureResponse");
     private final static QName _ReadPersonHistoryResponse_QNAME = new QName("http://ws.soap.assignment.introsde/", "readPersonHistoryResponse");
+    private final static QName _ReadPersonListResponse_QNAME = new QName("http://ws.soap.assignment.introsde/", "readPersonListResponse");
     private final static QName _UpdatePersonResponse_QNAME = new QName("http://ws.soap.assignment.introsde/", "updatePersonResponse");
 
     /**
@@ -67,6 +69,22 @@ public class ObjectFactory {
      */
     public DeletePerson createDeletePerson() {
         return new DeletePerson();
+    }
+
+    /**
+     * Create an instance of {@link CreateFullPerson }
+     * 
+     */
+    public CreateFullPerson createCreateFullPerson() {
+        return new CreateFullPerson();
+    }
+
+    /**
+     * Create an instance of {@link CreateFullPersonResponse }
+     * 
+     */
+    public CreateFullPersonResponse createCreateFullPersonResponse() {
+        return new CreateFullPersonResponse();
     }
 
     /**
@@ -134,6 +152,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link ReadPersonListResponse }
+     * 
+     */
+    public ReadPersonListResponse createReadPersonListResponse() {
+        return new ReadPersonListResponse();
+    }
+
+    /**
      * Create an instance of {@link UpdatePersonResponse }
      * 
      */
@@ -174,11 +200,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetPeopleListResponse }
+     * Create an instance of {@link ReadPersonList }
      * 
      */
-    public GetPeopleListResponse createGetPeopleListResponse() {
-        return new GetPeopleListResponse();
+    public ReadPersonList createReadPersonList() {
+        return new ReadPersonList();
     }
 
     /**
@@ -219,14 +245,6 @@ public class ObjectFactory {
      */
     public UpdatePerson createUpdatePerson() {
         return new UpdatePerson();
-    }
-
-    /**
-     * Create an instance of {@link GetPeopleList }
-     * 
-     */
-    public GetPeopleList createGetPeopleList() {
-        return new GetPeopleList();
     }
 
     /**
@@ -309,21 +327,30 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CreateFullPerson }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://ws.soap.assignment.introsde/", name = "createFullPerson")
+    public JAXBElement<CreateFullPerson> createCreateFullPerson(CreateFullPerson value) {
+        return new JAXBElement<CreateFullPerson>(_CreateFullPerson_QNAME, CreateFullPerson.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CreateFullPersonResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://ws.soap.assignment.introsde/", name = "createFullPersonResponse")
+    public JAXBElement<CreateFullPersonResponse> createCreateFullPersonResponse(CreateFullPersonResponse value) {
+        return new JAXBElement<CreateFullPersonResponse>(_CreateFullPersonResponse_QNAME, CreateFullPersonResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link CreatePersonResponse }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://ws.soap.assignment.introsde/", name = "createPersonResponse")
     public JAXBElement<CreatePersonResponse> createCreatePersonResponse(CreatePersonResponse value) {
         return new JAXBElement<CreatePersonResponse>(_CreatePersonResponse_QNAME, CreatePersonResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetPeopleList }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://ws.soap.assignment.introsde/", name = "getPeopleList")
-    public JAXBElement<GetPeopleList> createGetPeopleList(GetPeopleList value) {
-        return new JAXBElement<GetPeopleList>(_GetPeopleList_QNAME, GetPeopleList.class, null, value);
     }
 
     /**
@@ -372,12 +399,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetPeopleListResponse }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link ReadPersonList }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://ws.soap.assignment.introsde/", name = "getPeopleListResponse")
-    public JAXBElement<GetPeopleListResponse> createGetPeopleListResponse(GetPeopleListResponse value) {
-        return new JAXBElement<GetPeopleListResponse>(_GetPeopleListResponse_QNAME, GetPeopleListResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://ws.soap.assignment.introsde/", name = "readPersonList")
+    public JAXBElement<ReadPersonList> createReadPersonList(ReadPersonList value) {
+        return new JAXBElement<ReadPersonList>(_ReadPersonList_QNAME, ReadPersonList.class, null, value);
     }
 
     /**
@@ -423,6 +450,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://ws.soap.assignment.introsde/", name = "readPersonHistoryResponse")
     public JAXBElement<ReadPersonHistoryResponse> createReadPersonHistoryResponse(ReadPersonHistoryResponse value) {
         return new JAXBElement<ReadPersonHistoryResponse>(_ReadPersonHistoryResponse_QNAME, ReadPersonHistoryResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ReadPersonListResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://ws.soap.assignment.introsde/", name = "readPersonListResponse")
+    public JAXBElement<ReadPersonListResponse> createReadPersonListResponse(ReadPersonListResponse value) {
+        return new JAXBElement<ReadPersonListResponse>(_ReadPersonListResponse_QNAME, ReadPersonListResponse.class, null, value);
     }
 
     /**

@@ -61,18 +61,6 @@ public interface People {
 
     /**
      * 
-     * @return
-     *     returns java.util.List<introsde.assignment.soap.ws.Person>
-     */
-    @WebMethod
-    @WebResult(name = "people", targetNamespace = "")
-    @RequestWrapper(localName = "getPeopleList", targetNamespace = "http://ws.soap.assignment.introsde/", className = "introsde.assignment.soap.ws.GetPeopleList")
-    @ResponseWrapper(localName = "getPeopleListResponse", targetNamespace = "http://ws.soap.assignment.introsde/", className = "introsde.assignment.soap.ws.GetPeopleListResponse")
-    @Action(input = "http://ws.soap.assignment.introsde/People/getPeopleListRequest", output = "http://ws.soap.assignment.introsde/People/getPeopleListResponse")
-    public List<Person> getPeopleList();
-
-    /**
-     * 
      * @param person
      * @throws ParseException_Exception
      */
@@ -85,6 +73,38 @@ public interface People {
     public void createPerson(
         @WebParam(name = "person", targetNamespace = "", mode = WebParam.Mode.INOUT)
         Holder<Person> person)
+        throws ParseException_Exception
+    ;
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<introsde.assignment.soap.ws.Person>
+     */
+    @WebMethod
+    @WebResult(name = "people", targetNamespace = "")
+    @RequestWrapper(localName = "readPersonList", targetNamespace = "http://ws.soap.assignment.introsde/", className = "introsde.assignment.soap.ws.ReadPersonList")
+    @ResponseWrapper(localName = "readPersonListResponse", targetNamespace = "http://ws.soap.assignment.introsde/", className = "introsde.assignment.soap.ws.ReadPersonListResponse")
+    @Action(input = "http://ws.soap.assignment.introsde/People/readPersonListRequest", output = "http://ws.soap.assignment.introsde/People/readPersonListResponse")
+    public List<Person> readPersonList();
+
+    /**
+     * 
+     * @param measure
+     * @param person
+     * @throws ParseException_Exception
+     */
+    @WebMethod
+    @RequestWrapper(localName = "createFullPerson", targetNamespace = "http://ws.soap.assignment.introsde/", className = "introsde.assignment.soap.ws.CreateFullPerson")
+    @ResponseWrapper(localName = "createFullPersonResponse", targetNamespace = "http://ws.soap.assignment.introsde/", className = "introsde.assignment.soap.ws.CreateFullPersonResponse")
+    @Action(input = "http://ws.soap.assignment.introsde/People/createFullPersonRequest", output = "http://ws.soap.assignment.introsde/People/createFullPersonResponse", fault = {
+        @FaultAction(className = ParseException_Exception.class, value = "http://ws.soap.assignment.introsde/People/createFullPerson/Fault/ParseException")
+    })
+    public void createFullPerson(
+        @WebParam(name = "person", targetNamespace = "", mode = WebParam.Mode.INOUT)
+        Holder<Person> person,
+        @WebParam(name = "measure", targetNamespace = "")
+        HealthMeasureHistory measure)
         throws ParseException_Exception
     ;
 

@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="idPerson" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="personId" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="firstname" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="lastname" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="birthdate" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
@@ -43,7 +43,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "person", propOrder = {
-    "idPerson",
+    "personId",
     "firstname",
     "lastname",
     "birthdate",
@@ -51,26 +51,26 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class Person {
 
-    protected int idPerson;
+    protected int personId;
     protected String firstname;
     protected String lastname;
     protected String birthdate;
     protected Person.CurrentHealth currentHealth;
 
     /**
-     * Gets the value of the idPerson property.
+     * Gets the value of the personId property.
      * 
      */
-    public int getIdPerson() {
-        return idPerson;
+    public int getPersonId() {
+        return personId;
     }
 
     /**
-     * Sets the value of the idPerson property.
+     * Sets the value of the personId property.
      * 
      */
-    public void setIdPerson(int value) {
-        this.idPerson = value;
+    public void setPersonId(int value) {
+        this.personId = value;
     }
 
     /**

@@ -15,7 +15,7 @@
        # The target "download-ivy" and "install-ivy" will download the ivy jar and place it in the "ivy" folder
        # 
 -->
-    <project name="introsde-2015-assignment-3-server" default="install" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
+    <project name="introsde-2015-assignment-3-client" default="install" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
         <!-- PART 1: Ivy properties, download, installation and configuration -->
         <property name="ivy.install.version" value="2.4.0-rc1" />
         <property name="ivy.jar.dir" value="${basedir}/ivy" />
@@ -121,8 +121,8 @@
             </java>
         </target>
         <target name="execute.client">
-            <echo message="ant execute.client introsde.assignment.soap.ws.TestClient in ${build.dir}" />
-            <java classname="introsde.assignment.soap.ws.TestClient" classpath="${build.dir}" fork="true">
+            <echo message="ant execute.client introsde.assignment.soap.Client.TestClient in ${build.dir}" />
+            <java classname="client.TestClient" classpath="${build.dir}" fork="true">
                 <arg value="$JAVA_OPTS  -cp" />
                 <classpath>
                     <path location="build" />
