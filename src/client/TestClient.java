@@ -9,6 +9,7 @@ import javax.xml.ws.Holder;
 import javax.xml.ws.Service;
 
 import introsde.assignment.soap.ws.HealthMeasureHistory;
+import introsde.assignment.soap.ws.ParseException_Exception;
 import introsde.assignment.soap.ws.People;
 import introsde.assignment.soap.ws.Person;
 import introsde.assignment.soap.ws.Person.CurrentHealth;
@@ -26,54 +27,14 @@ public class TestClient{
      
         request1(people);
         request2(people, 2);
-        
-        // read person with id 1
-        
-        //final Person person = people.readPerson(2);
-        //System.out.println("First Person with id=2 before updating ==> " + person.getFirstname());
-        
-        //person.setFirstname("Batman");
-
-        //final Holder<Person> holder = new Holder<Person>(person);
-        //people.updatePerson(holder);
-        
-        //System.out.println(people.getPeopleList());
-        
-        //Person p = people.readPerson(2);
-        //System.out.println("First Person with id=2, after updating ==> " + p.getFirstname());
-        // change name of the person with id 1
-        //String uuid = UUID.randomUUID().toString();
-        //p.setFirstname("Veabrechuk New name");
-        
-        //System.out.println(people.readPersonList());
-        
-        /*
-        List<Person> p1 = people.readPersonList();
-        for(int i=0; i<p1.size(); i++){
-        	System.out.println("Id " + p1.get(i).getPersonId());
-        	System.out.println("Firstname " + p1.get(i).getFirstname());
-        	System.out.println("Lastname " + p1.get(i).getLastname());
-        	System.out.println("Birthdate " + p1.get(i).getBirthdate());
-        	if(p1.get(i).getCurrentHealth().getMeasure().isEmpty()){
-        		System.out.println("No CurrentHealth");
-        		System.out.println("===============================================");
-        	}else{
-        	System.out.println("*CurrentHealth*");
-        	CurrentHealth x = p1.get(i).getCurrentHealth();
-        	List<HealthMeasureHistory> health = x.getMeasure();
-        	for(int b=0; b<health.size();b++){
-        		System.out.println("mid: " + health.get(b).getMid());
-        		System.out.println("dateRegistered: " + health.get(b).getDateRegistered());
-        		System.out.println("measureType: " + health.get(b).getMeasureType());
-        		System.out.println("measureValue: " + health.get(b).getMeasureValue());
-        		System.out.println("measureValueType: " + health.get(b).getMeasureValueType());
-        	}
-        	System.out.println("===============================================");
-        	
-        	}
-        	
-        }*/
-        
+        request3(people);
+        request4(people); 
+        request5(people);
+        request6(people, 2, "weight");
+        request7(people);
+        request8(people,2,"weight",5);
+        request9(people, "2015-10-11", "height", "180", "Integer", 3);
+              
     }
     
     //For each method - print into your log file methods name and number, parameters you passed and response you received
@@ -137,14 +98,113 @@ public class TestClient{
         	
         }
     	
+    public static void request3(People people) throws ParseException_Exception{
+    	printMethod("updatePerson(Person p)", 3, "personId=2");
+    	final Person person = people.readPerson(2);
+        System.out.println("Person with id=2 before updating ==> " + person.getFirstname());
+        
+        person.setFirstname("Batman");
+
+        final Holder<Person> holder = new Holder<Person>(person);
+        people.updatePerson(holder);
+        
+        Person p = people.readPerson(2);
+        System.out.println("Person with id=2, after updating ==> " + p.getFirstname());
+    }
     
     
+    public static void request4(People people) throws ParseException_Exception{
+    	printMethod("createPerson(Person p)", 4, "Person: firstname=Francesco,lastname=Totti,birthdate=1978-10-10");
+    	Person person = new Person();
+    	person.setFirstname("Francesco");
+    	person.setLastname("Totti");
+    	person.setBirthdate("1978-10-10");
+    	
+    	final Holder<Person> holder = new Holder<Person>(person);
+    	people.createPerson(holder);
+    	
+    	List<Person> person1 = people.readPersonList();
+    	int size = person1.size() - 1;
+    	int id = person1.get(size).getPersonId();
+    	
+    	Person p = people.readPerson(id);
+    	System.out.println("personId: " + p.getPersonId());
+    	System.out.println("Firstname: " + p.getFirstname());
+    	System.out.println("Lastname: " + p.getLastname());
+    	System.out.println("Birthdate: " + p.getBirthdate());
     
+    }
+    
+    /**
+     * In this method i execute the deletePerson(int id) method
+     * To be sure that the id i'm passing trought the method exists 
+     * i decided to choose an existing id and in particular the last personId
+     * inserted
+     * 
+     * @param people
+     */
+    public static void request5(People people){
+    	printMethod("deletePerson(int id)", 5, "last personId in the database");
+    	List<Person> person = people.readPersonList();
+    	int size = person.size() - 1;
+    	int id = person.get(size).getPersonId();
+    	people.deletePerson(id);
+    	System.out.println("The person with id: " + id + " have been deleted.");
+    }
+    
+    public static void request6(People people, int id, String measureType){
+    	printMethod("readPersonHistory(int id, String measureType)", 6, "personId=2, measureType=weight");
+    	List<HealthMeasureHistory> person_history = people.readPersonHistory(id, measureType);
+    	for(int i=0; i<person_history.size(); i++){
+    		System.out.println("mid: " + person_history.get(i).getMid());
+    		System.out.println("dateRegistered: " + person_history.get(i).getDateRegistered());
+    		System.out.println("measureType: " + person_history.get(i).getMeasureType());
+    		System.out.println("measureValue: " + person_history.get(i).getMeasureValue());
+    		System.out.println("measureValueType: " + person_history.get(i).getMeasureValueType());
+    	}
+    }
+    
+    
+    public static void request7(People people){
+    	printMethod("readMeasureTypes()", 7, "no parameters");
+    	List<String> measures = people.readMeasureTypes();
+    	for (String element : measures) {
+    	    System.out.println(element);
+    	}
+    }
+    
+    //readPersonMeasure(Long id, String measureType, Long mid)
+    public static void request8(People people, int id, String measureType, int mid){
+    	String param = "personId= "+id+", measureType= "+measureType+", mid= "+mid;
+    	printMethod("readPersonMeasure(int id, String measureType, int mid)", 8, param);
+    	int measureValue = people.readPersonMeasure(2, measureType, 5);
+    	System.out.println("measureValue: " + measureValue);
+    }
+    
+    //savePersonMeasure(Long id, Measure m)
+    public static void request9(People people, String dateRegistered, String measureType, String measureValue, String measureValueType, int id) throws ParseException_Exception{
+    	String param =  "personId: " + id + ", dateRegistered: " + dateRegistered + ", measureType: " + measureType + ", measureValueType: " + measureValueType ;
+    	printMethod("savePersonMeasure(Long id, Measure m)", 9, param);
+    	HealthMeasureHistory measure_history = new HealthMeasureHistory();
+    	measure_history.setDateRegistered(dateRegistered);
+    	measure_history.setMeasureType(measureType);
+    	measure_history.setMeasureValue(measureValue);
+    	measure_history.setMeasureValueType(measureValueType);
+    	
+    	people.savePersonMeasure(id, measure_history);
+    	
+    	people.readPerson(id);
+    	
+    	
+    	
+    }
     
     public static void printMethod(String method_name, int method_number, String param_passed){
     	System.out.println("=============================================================================");
     	System.out.println("-----------------------------------------------------------------------------");
-    	System.out.println("Method: " + method_name + " Method#" + method_number + " Param: " + param_passed);
+    	System.out.println("Method: [" + method_name + "]");
+    	System.out.println("Method#: [" + method_number + "]");
+    	System.out.println("Param: [" + param_passed + "]");
     	System.out.println("-----------------------------------------------------------------------------");
     }
     
