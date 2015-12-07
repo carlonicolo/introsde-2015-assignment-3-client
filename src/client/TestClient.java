@@ -24,7 +24,8 @@ public class TestClient{
 
         People people = service.getPort(People.class);
         
-     
+        
+        
         request1(people);
         System.out.println("#########################################################");
         System.out.println(" ");
@@ -37,13 +38,19 @@ public class TestClient{
         
         System.out.println(" ");
         System.out.println("#########################################################");
-        request3(people);
+        request3(people,3,"Jacky");
         System.out.println("#########################################################");
         System.out.println(" ");
         
         System.out.println(" ");
         System.out.println("#########################################################");
-        request4(people); 
+        request4_1(people,"Billy", "Costacurta", "1972-10-11","2015-12-10","weight","72","Int"); 
+        System.out.println("#########################################################");
+        System.out.println(" ");
+        
+        System.out.println(" ");
+        System.out.println("#########################################################");
+        request4(people,"Francesco", "Totti", "1978-10-11"); 
         System.out.println("#########################################################");
         System.out.println(" ");
         
@@ -150,28 +157,92 @@ public class TestClient{
         	
         }
     	
-    public static void request3(People people) throws ParseException_Exception{
+    public static void request3(People people, int id, String firstname) throws ParseException_Exception{
     	printMethod("updatePerson(Person p)", 3, "personId=2");
-    	final Person person = people.readPerson(2);
+    	final Person person = people.readPerson(id);
         System.out.println("Person with id=2 before updating ==> " + person.getFirstname());
         
-        person.setFirstname("Batman");
+        person.setFirstname(firstname);
 
         final Holder<Person> holder = new Holder<Person>(person);
         people.updatePerson(holder);
         
-        Person p = people.readPerson(2);
+        Person p = people.readPerson(id);
         System.out.println("Person with id=2, after updating ==> " + p.getFirstname());
         System.out.println(" ");
     }
     
     
-    public static void request4(People people) throws ParseException_Exception{
-    	printMethod("createPerson(Person p)", 4, "Person: firstname=Francesco,lastname=Totti,birthdate=1978-10-10");
+    public static void request4_1(People people, String firstname, String lastname, String birthdate, String dateRegistered, String measureType, String measureValue, String measureValueType) throws ParseException_Exception{
+    	String param =  "Firstname: " + firstname + ", Lastname: " + lastname + ", Birthdate: " + birthdate + ", dateRegistered: " + dateRegistered +  ", measureType: " + measureType + ", measureValue: " + measureValue + ", measureValueType: " + measureValueType;
+    	printMethod("createFullPerson(Person p)", 11, param);
     	Person person = new Person();
-    	person.setFirstname("Francesco");
-    	person.setLastname("Totti");
-    	person.setBirthdate("1978-10-10");
+    	person.setFirstname(firstname);
+    	person.setLastname(lastname);
+    	person.setBirthdate(birthdate);
+    	
+    	final Holder<Person> holder = new Holder<Person>(person);
+    	//people.createPerson(holder);
+    	
+    	HealthMeasureHistory currentHealth = new HealthMeasureHistory();
+    	currentHealth.setDateRegistered(dateRegistered);
+    	currentHealth.setMeasureType(measureType);
+    	currentHealth.setMeasureValue(measureValue);
+    	currentHealth.setMeasureValueType(measureValueType);
+    	
+    	
+    	people.createFullPerson(holder, currentHealth);
+    	
+    	
+    	List<Person> person1 = people.readPersonList();
+    	int size = person1.size() - 1;
+    	int id_person = person1.get(size).getPersonId();
+    	
+    	
+    	
+    	Person p = people.readPerson(id_person);
+    	System.out.println("personId: " + p.getPersonId());
+    	System.out.println("Firstname: " + p.getFirstname());
+    	System.out.println("Lastname: " + p.getLastname());
+    	System.out.println("Birthdate: " + p.getBirthdate());
+    	if(p.getCurrentHealth().getMeasure().isEmpty()){
+    		System.out.println("No CurrentHealth");
+    		System.out.println(" ");
+    		System.out.println(" ");
+    	}else{
+    	System.out.println("*CurrentHealth*");
+    	CurrentHealth x = p.getCurrentHealth();
+    	List<HealthMeasureHistory> health = x.getMeasure();
+    	for(int b=0; b<health.size();b++){
+    		System.out.println("mid: " + health.get(b).getMid());
+    		System.out.println("dateRegistered: " + health.get(b).getDateRegistered());
+    		System.out.println("measureType: " + health.get(b).getMeasureType());
+    		System.out.println("measureValue: " + health.get(b).getMeasureValue());
+    		System.out.println("measureValueType: " + health.get(b).getMeasureValueType());
+    		}
+    	}
+    	
+    	/*
+    	Person p = people.readPerson(id);
+    	System.out.println("personId: " + p.getPersonId());
+    	System.out.println("Firstname: " + p.getFirstname());
+    	System.out.println("Lastname: " + p.getLastname());
+    	System.out.println("Birthdate: " + p.getBirthdate());
+    	System.out.println(" ");
+    	*/
+    	
+    	
+    }
+    
+    
+    
+    public static void request4(People people, String firstname, String lastname, String birthdate) throws ParseException_Exception{
+    	String param =  "Firstname: " + firstname + ", Lastname: " + lastname + ", Birthdate: " + birthdate;
+    	printMethod("createPerson(Person p)", 4, param);
+    	Person person = new Person();
+    	person.setFirstname(firstname);
+    	person.setLastname(lastname);
+    	person.setBirthdate(birthdate);
     	
     	final Holder<Person> holder = new Holder<Person>(person);
     	people.createPerson(holder);
@@ -188,6 +259,9 @@ public class TestClient{
     	System.out.println(" ");
     
     }
+    
+    
+    
     
     /**
      * In this method i execute the deletePerson(int id) method
