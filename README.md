@@ -1,6 +1,6 @@
 # Introsde 2015 Assignment#3(CLIENT): SOAP Web Services
 This is the third assignment for the "Introduction to Service Design and Engineering" course. The assignment is composed by two parts:
-* The **Client** that call each of server implemented services and prints the result. ***This README is about the client***   
+* The **Client** that calls each of server implemented services and prints the result. ***This README is about the client***   
 * The [**Server**](https://github.com/carlonicolo/introsde-2015-assignment-3) that exposes SOAP Web Services, and that is deployied on Heroku. [**Here**](https://github.com/carlonicolo/introsde-2015-assignment-3/blob/master/README.md) there is the README for the client.
 
 In this assignment is requested to implement a server and a client calling this server. </br>
