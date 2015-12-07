@@ -120,9 +120,39 @@
                 </classpath>
             </java>
         </target>
-        <target name="execute.client">
-            <echo message="ant execute.client introsde.assignment.soap.Client.TestClient in ${build.dir}" />
-            <java classname="client.TestClient" classpath="${build.dir}" fork="true">
+    	    	
+    	
+        <target name="execute.client" depends="install">
+        	<record name="client.log" action="start"/>
+        	<antcall target="execute.client.heroku"></antcall>
+        	<record name="client.log" action="stop"/>
+        </target>
+        	    	<!-- end client connection to my server Heroku -->    	
+
+
+    	
+    	
+        <target name="execute.client.heroku">
+        	
+            <!-- <echo message="ant execute.client introsde.assignment.soap.Client.TestClient" /> -->
+        	<echo message="################################################################### " />
+        	<echo message="IntroSDE Assignment #3: SOAP Web Services" />
+        	<echo message="Student: Carlo Nicolò" />
+        	<echo message="################################################################### " />
+        	<echo message=" " />
+        	<echo message="Endpoint" />
+        	<echo message="Service Name:{http://ws.soap.assignment.introsde/}PeopleService"/>
+        	<echo message="Port Name:{http://ws.soap.assignment.introsde/}PeopleImplPort"/>
+        	<echo message=" " />
+        	<echo message="Information" />
+        	<echo message="Address:	http://vast-temple-7100.herokuapp.com/ws/people"/>
+   		   	<echo message="WSDL: http://vast-temple-7100.herokuapp.com/ws/people?wsdl"/>
+        	<echo message=" " />
+        	<echo message="Implementation class: introsde.assignment.soap.ws.PeopleImpl"/>
+        	<echo message=" " />
+        	<echo message="################################################################### " />
+        	
+        	<java classname="client.TestClient" classpath="${build.dir}" fork="true">
                 <arg value="$JAVA_OPTS  -cp" />
                 <classpath>
                     <path location="build" />
@@ -133,6 +163,9 @@
                 </classpath>
             </java>
         </target>
+    	
+    	
+    	
         <!-- Run the JUnit Tests -->
         <!-- Output is XML, could also be plain-->
         <target name="junit">
@@ -163,4 +196,8 @@
                 <classes dir="${build.dir}" />
             </war>
         </target>
+    	
+    	
+        	
+    	
     </project>
