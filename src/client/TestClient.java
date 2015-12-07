@@ -14,7 +14,26 @@ import introsde.assignment.soap.ws.People;
 import introsde.assignment.soap.ws.Person;
 import introsde.assignment.soap.ws.Person.CurrentHealth;
 
+/**
+ * This class represents the client for the assignment#3 
+ * for the course IntroSDE.
+ * Is used to test SOAP Web Services to a specified server
+ * hosted on Heroku.
+ * 
+ * There are #10 methods as speficied in the assignment 
+ * plus another method the 11° method used for creating a person 
+ * with measure.
+ * 
+ * 
+ * 
+ * @author Carlo Nicolo'
+ *
+ */
 public class TestClient{
+	
+	//Static variable used for ensuring that the mid is prensent
+	static int mid_request9;
+	
     public static void main(String[] args) throws Exception {
         URL url = new URL("http://vast-temple-7100.herokuapp.com/ws/people?wsdl");
         //1st argument service URI, refer to wsdl document above
@@ -24,9 +43,9 @@ public class TestClient{
 
         People people = service.getPort(People.class);
         
-        
-        
-        
+        //execution of all requests
+        System.out.println(" ");
+        System.out.println("#########################################################");
         request1(people);
         System.out.println("#########################################################");
         System.out.println(" ");
@@ -39,13 +58,13 @@ public class TestClient{
         
         System.out.println(" ");
         System.out.println("#########################################################");
-        request3(people,3,"Jacky");
+        request3(people,3,"Yuri");
         System.out.println("#########################################################");
         System.out.println(" ");
         
         System.out.println(" ");
         System.out.println("#########################################################");
-        request4_1(people,"Billy", "Costacurta", "1972-10-11","2015-12-10","weight","72","Int"); 
+        request4_1(people,"Jim", "Morrison", "1958-10-11","2015-12-07","weight","62","Int"); 
         System.out.println("#########################################################");
         System.out.println(" ");
         
@@ -75,26 +94,33 @@ public class TestClient{
         
         System.out.println(" ");
         System.out.println("#########################################################");
-        request8(people,2,"weight",5);
+        request8(people,3,"weight",6);
         System.out.println("#########################################################");
         System.out.println(" ");
         
         String measureTypeParam = "weight";
         System.out.println(" ");
         System.out.println("#########################################################");
-        request9(people, "2015-12-17", measureTypeParam, "188", "Int", 4253);
+        request9(people, "2015-12-17", measureTypeParam, "188", "Int", 53);
         System.out.println("#########################################################");
         System.out.println(" ");
         
         System.out.println(" ");
         System.out.println("#########################################################");
-        request10(people, "2015-10-16", measureTypeParam, "190", "Integer", 4253);
+        request10(people, "2015-10-16", measureTypeParam, "190", "Integer", 53);
         System.out.println("#########################################################");
         System.out.println(" ");      
     }
     
-    //For each method - print into your log file methods name and number, parameters you passed and response you received
     
+    /**
+     * This method is used to list all the people stored
+     * in the database using the method readPersonList() 
+     * 
+     * Method#1: readPersonList()
+     * 
+     * @param people
+     */
     public static void request1(People people){
     	printMethod("readPersonList()", 1, "no param requested");
     	List<Person> p1 = people.readPersonList();
@@ -128,7 +154,15 @@ public class TestClient{
     
     
     
-    //readPerson(Long id)
+    /**
+     * This method is used to retrieve all information about 
+     * a specified persond identified by an "id" param
+     * 
+     * Method#2: readPerson(Long id)
+     * 
+     * @param people
+     * @param id is the id of the person for which we want retrieve info
+     */
     public static void request2(People people, int id){
     	printMethod("readPerson(Long id)", 2, "personId=2");
     	Person p = people.readPerson(id);
@@ -157,9 +191,23 @@ public class TestClient{
         	}
         	
         }
-    	
+    
+    /**
+     * This method is used to updated a person identified by "id"
+     * using for exmaple a new "firstname".
+     * Creates a new person with the new firstname and then executes the
+     * method updatePerson(Person p)
+     * 
+     * Method#3: updatePerson(Person p)
+     * 
+     * @param people
+     * @param id is the id of the person for which we want update the info
+     * @param firstname is the new firstname
+     * @throws ParseException_Exception
+     */
     public static void request3(People people, int id, String firstname) throws ParseException_Exception{
-    	printMethod("updatePerson(Person p)", 3, "personId=2");
+    	String param = "personId: " + id; 
+    	printMethod("updatePerson(Person p)", 3, param);
     	final Person person = people.readPerson(id);
         System.out.println("Person with id=2 before updating ==> " + person.getFirstname());
         
@@ -174,9 +222,27 @@ public class TestClient{
     }
     
     
+    /**
+     * This method is used to create a new person with an healthProfile.
+     * We create a person and an healthprofile, using the params passed in the 
+     * method. At this point we are ready 
+     * to invoke the method createFullPerson(Person p, HealthProfile measure)
+     * 
+     * Method#11: createFullPerson(Person p, HealthProfile measure) 
+     * 
+     * @param people
+     * @param firstname 
+     * @param lastname
+     * @param birthdate
+     * @param dateRegistered
+     * @param measureType
+     * @param measureValue
+     * @param measureValueType
+     * @throws ParseException_Exception
+     */
     public static void request4_1(People people, String firstname, String lastname, String birthdate, String dateRegistered, String measureType, String measureValue, String measureValueType) throws ParseException_Exception{
     	String param =  "Firstname: " + firstname + ", Lastname: " + lastname + ", Birthdate: " + birthdate + ", dateRegistered: " + dateRegistered +  ", measureType: " + measureType + ", measureValue: " + measureValue + ", measureValueType: " + measureValueType;
-    	printMethod("createFullPerson(Person p)", 11, param);
+    	printMethod("createFullPerson(Person p, HealthProfile measure)", 11, param);
     	Person person = new Person();
     	person.setFirstname(firstname);
     	person.setLastname(lastname);
@@ -223,20 +289,21 @@ public class TestClient{
     		}
     	}
     	
-    	/*
-    	Person p = people.readPerson(id);
-    	System.out.println("personId: " + p.getPersonId());
-    	System.out.println("Firstname: " + p.getFirstname());
-    	System.out.println("Lastname: " + p.getLastname());
-    	System.out.println("Birthdate: " + p.getBirthdate());
-    	System.out.println(" ");
-    	*/
-    	
     	
     }
     
     
-    
+    /**
+     * This method is used to create a new person.
+     * 
+     * Method#4: createPerson(Person p)
+     * 
+     * @param people
+     * @param firstname
+     * @param lastname
+     * @param birthdate
+     * @throws ParseException_Exception
+     */
     public static void request4(People people, String firstname, String lastname, String birthdate) throws ParseException_Exception{
     	String param =  "Firstname: " + firstname + ", Lastname: " + lastname + ", Birthdate: " + birthdate;
     	printMethod("createPerson(Person p)", 4, param);
@@ -273,17 +340,29 @@ public class TestClient{
      * @param people
      */
     public static void request5(People people){
-    	printMethod("deletePerson(int id)", 5, "last personId in the database");
     	List<Person> person = people.readPersonList();
     	int size = person.size() - 1;
     	int id = person.get(size).getPersonId();
+    	String param = "personId: " + id;
+    	printMethod("deletePerson(int id)", 5, param);
     	people.deletePerson(id);
     	System.out.println("The person with id: " + id + " have been deleted.");
     	System.out.println(" ");
     }
     
+    /**
+     * This method is used to get all information person information about the 
+     * history of a specified measureType.
+     * 
+     * Method#6: readPersonHistory(int id, String measureType)
+     * 
+     * @param people
+     * @param id
+     * @param measureType
+     */
     public static void request6(People people, int id, String measureType){
-    	printMethod("readPersonHistory(int id, String measureType)", 6, "personId=2, measureType=weight");
+    	String param = "personId: " + id + ", measureType: " + measureType;
+    	printMethod("readPersonHistory(int id, String measureType)", 6, param);
     	List<HealthMeasureHistory> person_history = people.readPersonHistory(id, measureType);
     	for(int i=0; i<person_history.size(); i++){
     		System.out.println("mid: " + person_history.get(i).getMid());
@@ -296,7 +375,14 @@ public class TestClient{
     	System.out.println(" ");
     }
     
-    
+    /**
+     * This method is used to read all measureTypes stored in the database.
+     * In this case we used only height and weight.
+     * 
+     * Method#7: readMeasureTypes()
+     * 
+     * @param people
+     */
     public static void request7(People people){
     	printMethod("readMeasureTypes()", 7, "no parameters");
     	List<String> measures = people.readMeasureTypes();
@@ -307,17 +393,40 @@ public class TestClient{
     	System.out.println(" ");
     }
     
-    //readPersonMeasure(Long id, String measureType, Long mid)
+    /**
+     * This method is used to read the value of a specified "measureType" for 
+     * a person identified by the "id"
+     * 
+     * Method#8: readPersonMeasure(int id, String measureType, int mid)
+     * 
+     * @param people
+     * @param id
+     * @param measureType
+     * @param mid
+     */
     public static void request8(People people, int id, String measureType, int mid){
     	String param = "personId= "+id+", measureType= "+measureType+", mid= "+mid;
     	printMethod("readPersonMeasure(int id, String measureType, int mid)", 8, param);
-    	int measureValue = people.readPersonMeasure(2, measureType, 5);
+    	int measureValue = people.readPersonMeasure(id, measureType, mid);
     	System.out.println("measureValue: " + measureValue);
     	
     	System.out.println(" ");
     }
     
-    
+    /**
+     * This method is used for saving a new Person measure for a specified person identified by "id".
+     * The params are used for creating an HealthMeasureHistory object, using the setters methods.
+     * 
+     * Method#9: savePersonMeasure(int id, Measure m)
+     * 
+     * @param people
+     * @param dateRegistered
+     * @param measureType
+     * @param measureValue
+     * @param measureValueType
+     * @param id
+     * @throws ParseException_Exception
+     */
     public static void request9(People people, String dateRegistered, String measureType, String measureValue, String measureValueType, int id) throws ParseException_Exception{
     	String param =  "personId: " + id + ", dateRegistered: " + dateRegistered + ", measureType: " + measureType + ", measureValue: " + measureValue +  ", measureValueType: " + measureValueType ;
     	printMethod("savePersonMeasure(int id, Measure m)", 9, param);
@@ -334,7 +443,10 @@ public class TestClient{
     	
     	List<HealthMeasureHistory> person_history = people.readPersonHistory(id, measureType);
     	int last_measure = person_history.size() - 1;
-
+    	
+    	mid_request9 = person_history.get(last_measure).getMid();
+    	//System.out.println("Value of mid_request9: " + mid_request9);
+    	
     	System.out.println("mid: " + person_history.get(last_measure).getMid());
     	System.out.println("dateRegistered: " + person_history.get(last_measure).getDateRegistered());
     	System.out.println("measureType: " + person_history.get(last_measure).getMeasureType());
@@ -349,8 +461,19 @@ public class TestClient{
     
     
     
-    //updatePersonMeasure(Long id, Measure m)
-    
+    /**
+     * This method is used for updating an existing person measure for a specified person "id".
+     * 
+     * Method#10: updatePersonMeasure(int id, Measure m)
+     * 
+     * @param people
+     * @param dateRegistered
+     * @param measureType
+     * @param measureValue
+     * @param measureValueType
+     * @param id
+     * @throws ParseException_Exception
+     */
     public static void request10(People people, String dateRegistered, String measureType, String measureValue, String measureValueType, int id) throws ParseException_Exception{
     	String param =  "personId: " + id + ", dateRegistered: " + dateRegistered + ", measureType: " + measureType + ", measureValue: " + measureValue +  ", measureValueType: " + measureValueType ;
     	printMethod("updatePersonMeasure(int id, Measure m)", 10, param);
@@ -361,9 +484,10 @@ public class TestClient{
     	// In this way i'm sure that i will take the same mid that i used before
     	int mid = person_history_request9.get(last_measure).getMid();
     	
+    	//System.out.println("mid: " + mid_request9);
     	
     	HealthMeasureHistory measure_history = new HealthMeasureHistory();
-    	measure_history.setMid(mid);
+    	measure_history.setMid(mid_request9);
     	measure_history.setDateRegistered(dateRegistered);
     	measure_history.setMeasureType(measureType);
     	measure_history.setMeasureValue(measureValue);
@@ -388,7 +512,12 @@ public class TestClient{
     }
     
     
-    
+    /**
+     * 
+     * @param method_name
+     * @param method_number
+     * @param param_passed
+     */
     public static void printMethod(String method_name, int method_number, String param_passed){
     	System.out.println(" ");
     	System.out.println("Method ==> [" + method_name + "]");
