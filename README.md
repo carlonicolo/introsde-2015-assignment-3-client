@@ -123,12 +123,13 @@ In the next section i will show some piece of the client.log file.
 In this section i decided to show some parts of the [**log.file**](https://github.com/carlonicolo/introsde-2015-assignment-3-client/blob/master/client.log) for giving an idea of how the client works, how the log.file is structured and most important also domonstrate that the client works fine.</br>
 The information showed below are written in the client.log[https://github.com/carlonicolo/introsde-2015-assignment-3-client/blob/master/client.log]
 
-Below i execute the method#2 calling the main of TestClient.java
+Below i execute the method#2 in the main of TestClient.java where i call the method request2(people, 2)
 
 ```java
 request2(people, 2);
-```
-and this is the output as expected:
+``` 
+
+and this is the output as expected in the file client.log:
 
 ```
 [java] #########################################################
@@ -156,3 +157,4 @@ and this is the output as expected:
 * Method#: identifies the number of the method executed according with the list in the assignment, in this case 2.
 * Param: identifies the param passed to the method readPerson(2) in this case
 
+After these three tags there is the body response.
