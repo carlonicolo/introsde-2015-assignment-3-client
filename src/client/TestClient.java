@@ -58,13 +58,13 @@ public class TestClient{
         
         System.out.println(" ");
         System.out.println("#########################################################");
-        request3(people,3,"Micky");
+        request3(people,3,"Bobby");
         System.out.println("#########################################################");
         System.out.println(" ");
         
         System.out.println(" ");
         System.out.println("#########################################################");
-        request4_1(people,"Bruce", "Lee", "1961-10-11","2015-12-07","weight","85","Int"); 
+        request4_1(people,"Jimmy", "Lumbert", "1977-10-11","2015-12-08","weight","95","Int"); 
         System.out.println("#########################################################");
         System.out.println(" ");
         
