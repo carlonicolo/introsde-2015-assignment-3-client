@@ -26,15 +26,63 @@ public class TestClient{
         
      
         request1(people);
+        System.out.println("#########################################################");
+        System.out.println(" ");
+        
+        System.out.println(" ");
+        System.out.println("#########################################################");
         request2(people, 2);
+        System.out.println("#########################################################");
+        System.out.println(" ");
+        
+        System.out.println(" ");
+        System.out.println("#########################################################");
         request3(people);
+        System.out.println("#########################################################");
+        System.out.println(" ");
+        
+        System.out.println(" ");
+        System.out.println("#########################################################");
         request4(people); 
+        System.out.println("#########################################################");
+        System.out.println(" ");
+        
+        System.out.println(" ");
+        System.out.println("#########################################################");
         request5(people);
+        System.out.println("#########################################################");
+        System.out.println(" ");
+        
+        System.out.println(" ");
+        System.out.println("#########################################################");
         request6(people, 2, "weight");
+        System.out.println("#########################################################");
+        System.out.println(" ");
+        
+        System.out.println(" ");
+        System.out.println("#########################################################");
         request7(people);
+        System.out.println("#########################################################");
+        System.out.println(" ");
+        
+        System.out.println(" ");
+        System.out.println("#########################################################");
         request8(people,2,"weight",5);
-        request9(people, "2015-10-11", "height", "180", "Integer", 3);
-              
+        System.out.println("#########################################################");
+        System.out.println(" ");
+        
+        String measureTypeParam = "weight";
+        System.out.println(" ");
+        System.out.println("#########################################################");
+        request9(people, "2015-12-17", measureTypeParam, "188", "Int", 4253);
+        System.out.println("#########################################################");
+        System.out.println(" ");
+        
+        System.out.println(" ");
+        System.out.println("#########################################################");
+        request10(people, "2015-10-16", measureTypeParam, "190", "Integer", 4253);
+        System.out.println("#########################################################");
+        System.out.println(" ");      
     }
     
     //For each method - print into your log file methods name and number, parameters you passed and response you received
@@ -49,7 +97,8 @@ public class TestClient{
         	System.out.println("Birthdate: " + p1.get(i).getBirthdate());
         	if(p1.get(i).getCurrentHealth().getMeasure().isEmpty()){
         		System.out.println("No CurrentHealth");
-        		System.out.println("=============================================================================");
+        		System.out.println(" ");
+        		System.out.println(" ");
         	}else{
         	System.out.println("*CurrentHealth*");
         	CurrentHealth x = p1.get(i).getCurrentHealth();
@@ -61,7 +110,8 @@ public class TestClient{
         		System.out.println("measureValue: " + health.get(b).getMeasureValue());
         		System.out.println("measureValueType: " + health.get(b).getMeasureValueType());
         	}
-        	System.out.println("=============================================================================");
+        	System.out.println(" ");
+        	System.out.println(" ");
         	
         	}
         	
@@ -80,7 +130,8 @@ public class TestClient{
         	System.out.println("Birthdate: " + p.getBirthdate());
         	if(p.getCurrentHealth().getMeasure().isEmpty()){
         		System.out.println("No CurrentHealth");
-        		System.out.println("=============================================================================");
+        		System.out.println(" ");
+        		System.out.println(" ");
         	}else{
         	System.out.println("*CurrentHealth*");
         	CurrentHealth x = p.getCurrentHealth();
@@ -92,7 +143,8 @@ public class TestClient{
         		System.out.println("measureValue: " + health.get(b).getMeasureValue());
         		System.out.println("measureValueType: " + health.get(b).getMeasureValueType());
         	}
-        	System.out.println("=============================================================================");
+        	System.out.println(" ");
+        	System.out.println(" ");
         	
         	}
         	
@@ -110,6 +162,7 @@ public class TestClient{
         
         Person p = people.readPerson(2);
         System.out.println("Person with id=2, after updating ==> " + p.getFirstname());
+        System.out.println(" ");
     }
     
     
@@ -132,6 +185,7 @@ public class TestClient{
     	System.out.println("Firstname: " + p.getFirstname());
     	System.out.println("Lastname: " + p.getLastname());
     	System.out.println("Birthdate: " + p.getBirthdate());
+    	System.out.println(" ");
     
     }
     
@@ -150,6 +204,7 @@ public class TestClient{
     	int id = person.get(size).getPersonId();
     	people.deletePerson(id);
     	System.out.println("The person with id: " + id + " have been deleted.");
+    	System.out.println(" ");
     }
     
     public static void request6(People people, int id, String measureType){
@@ -162,6 +217,8 @@ public class TestClient{
     		System.out.println("measureValue: " + person_history.get(i).getMeasureValue());
     		System.out.println("measureValueType: " + person_history.get(i).getMeasureValueType());
     	}
+    	
+    	System.out.println(" ");
     }
     
     
@@ -171,6 +228,8 @@ public class TestClient{
     	for (String element : measures) {
     	    System.out.println(element);
     	}
+    	
+    	System.out.println(" ");
     }
     
     //readPersonMeasure(Long id, String measureType, Long mid)
@@ -179,12 +238,16 @@ public class TestClient{
     	printMethod("readPersonMeasure(int id, String measureType, int mid)", 8, param);
     	int measureValue = people.readPersonMeasure(2, measureType, 5);
     	System.out.println("measureValue: " + measureValue);
+    	
+    	System.out.println(" ");
     }
     
-    //savePersonMeasure(Long id, Measure m)
+    
     public static void request9(People people, String dateRegistered, String measureType, String measureValue, String measureValueType, int id) throws ParseException_Exception{
-    	String param =  "personId: " + id + ", dateRegistered: " + dateRegistered + ", measureType: " + measureType + ", measureValueType: " + measureValueType ;
-    	printMethod("savePersonMeasure(Long id, Measure m)", 9, param);
+    	String param =  "personId: " + id + ", dateRegistered: " + dateRegistered + ", measureType: " + measureType + ", measureValue: " + measureValue +  ", measureValueType: " + measureValueType ;
+    	printMethod("savePersonMeasure(int id, Measure m)", 9, param);
+    	
+    	
     	HealthMeasureHistory measure_history = new HealthMeasureHistory();
     	measure_history.setDateRegistered(dateRegistered);
     	measure_history.setMeasureType(measureType);
@@ -193,19 +256,70 @@ public class TestClient{
     	
     	people.savePersonMeasure(id, measure_history);
     	
-    	people.readPerson(id);
     	
+    	List<HealthMeasureHistory> person_history = people.readPersonHistory(id, measureType);
+    	int last_measure = person_history.size() - 1;
+
+    	System.out.println("mid: " + person_history.get(last_measure).getMid());
+    	System.out.println("dateRegistered: " + person_history.get(last_measure).getDateRegistered());
+    	System.out.println("measureType: " + person_history.get(last_measure).getMeasureType());
+    	System.out.println("measureValue: " + person_history.get(last_measure).getMeasureValue());
+    	System.out.println("measureValueType: " + person_history.get(last_measure).getMeasureValueType());
     	
+    	System.out.println(" ");
+
     	
     }
     
+    
+    
+    
+    //updatePersonMeasure(Long id, Measure m)
+    
+    public static void request10(People people, String dateRegistered, String measureType, String measureValue, String measureValueType, int id) throws ParseException_Exception{
+    	String param =  "personId: " + id + ", dateRegistered: " + dateRegistered + ", measureType: " + measureType + ", measureValue: " + measureValue +  ", measureValueType: " + measureValueType ;
+    	printMethod("updatePersonMeasure(int id, Measure m)", 10, param);
+    	
+    	List<HealthMeasureHistory> person_history_request9 = people.readPersonHistory(id, measureType);
+    	int last_measure = person_history_request9.size() - 1;
+    	
+    	// In this way i'm sure that i will take the same mid that i used before
+    	int mid = person_history_request9.get(last_measure).getMid();
+    	
+    	
+    	HealthMeasureHistory measure_history = new HealthMeasureHistory();
+    	measure_history.setMid(mid);
+    	measure_history.setDateRegistered(dateRegistered);
+    	measure_history.setMeasureType(measureType);
+    	measure_history.setMeasureValue(measureValue);
+    	measure_history.setMeasureValueType(measureValueType);
+    	
+    	final Holder<HealthMeasureHistory> holder = new Holder<HealthMeasureHistory>(measure_history);
+        people.updatePersonMeasure(id, holder);
+    	
+        
+        List<HealthMeasureHistory> person_history = people.readPersonHistory(id, measureType);
+        for(int i=0; i<person_history.size(); i++){
+        	if(person_history.get(i).getMid() == mid){
+        		System.out.println("mid: " + person_history.get(i).getMid());
+            	System.out.println("dateRegistered: " + person_history.get(i).getDateRegistered());
+            	System.out.println("measureType: " + person_history.get(i).getMeasureType());
+            	System.out.println("measureValue: " + person_history.get(i).getMeasureValue());
+            	System.out.println("measureValueType: " + person_history.get(i).getMeasureValueType());
+        	}
+        }
+    	
+        System.out.println(" ");
+    }
+    
+    
+    
     public static void printMethod(String method_name, int method_number, String param_passed){
-    	System.out.println("=============================================================================");
-    	System.out.println("-----------------------------------------------------------------------------");
-    	System.out.println("Method: [" + method_name + "]");
-    	System.out.println("Method#: [" + method_number + "]");
-    	System.out.println("Param: [" + param_passed + "]");
-    	System.out.println("-----------------------------------------------------------------------------");
+    	System.out.println(" ");
+    	System.out.println("Method ==> [" + method_name + "]");
+    	System.out.println("Method# ==> [" + method_number + "]");
+    	System.out.println("Param ==> [" + param_passed + "]");
+    	System.out.println(" ");
     }
     
     
