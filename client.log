@@ -17,6 +17,8 @@ execute.client.heroku:
      [echo]  
      [echo] ################################################################### 
      [java]  
+     [java] #########################################################
+     [java]  
      [java] Method ==> [readPersonList()]
      [java] Method# ==> [1]
      [java] Param ==> [no param requested]
@@ -46,9 +48,9 @@ execute.client.heroku:
      [java]  
      [java]  
      [java] personId: 3
-     [java] Firstname: Jacky
+     [java] Firstname: Yuri
      [java] Lastname: Van Basten
-     [java] Birthdate: 1971-11-23
+     [java] Birthdate: 1973-11-23
      [java] *CurrentHealth*
      [java] mid: 3
      [java] dateRegistered: 2015-10-09
@@ -67,11 +69,6 @@ execute.client.heroku:
      [java] Lastname: Marley
      [java] Birthdate: 1997-12-09
      [java] *CurrentHealth*
-     [java] mid: 51
-     [java] dateRegistered: 2015-12-24
-     [java] measureType: height
-     [java] measureValue: 195
-     [java] measureValueType: Int
      [java] mid: 4
      [java] dateRegistered: 2015-12-09
      [java] measureType: weight
@@ -79,27 +76,22 @@ execute.client.heroku:
      [java] measureValueType: Int
      [java]  
      [java]  
-     [java] personId: 53
-     [java] Firstname: Paolo
-     [java] Lastname: Maldini
-     [java] Birthdate: 1968-06-26
+     [java] personId: 51
+     [java] Firstname: Jim
+     [java] Lastname: Morrison
+     [java] Birthdate: 1958-10-11
+     [java] No CurrentHealth
+     [java]  
+     [java]  
+     [java] personId: 57
+     [java] Firstname: Carl
+     [java] Lastname: Lewis
+     [java] Birthdate: 1961-10-11
      [java] *CurrentHealth*
-     [java] mid: 52
+     [java] mid: 57
      [java] dateRegistered: 2015-12-07
-     [java] measureType: height
-     [java] measureValue: 186
-     [java] measureValueType: Int
-     [java]  
-     [java]  
-     [java] personId: 54
-     [java] Firstname: Billy
-     [java] Lastname: Costacurta
-     [java] Birthdate: 1972-10-11
-     [java] *CurrentHealth*
-     [java] mid: 53
-     [java] dateRegistered: 2015-12-10
      [java] measureType: weight
-     [java] measureValue: 72
+     [java] measureValue: 81
      [java] measureValueType: Int
      [java]  
      [java]  
@@ -131,29 +123,29 @@ execute.client.heroku:
      [java]  
      [java] Method ==> [updatePerson(Person p)]
      [java] Method# ==> [3]
-     [java] Param ==> [personId=2]
+     [java] Param ==> [personId: 3]
      [java]  
-     [java] Person with id=2 before updating ==> Jacky
-     [java] Person with id=2, after updating ==> Jacky
-     [java]  
-     [java] #########################################################
-     [java]  
+     [java] Person with id=2 before updating ==> Yuri
+     [java] Person with id=2, after updating ==> Bob
      [java]  
      [java] #########################################################
      [java]  
-     [java] Method ==> [createFullPerson(Person p)]
+     [java]  
+     [java] #########################################################
+     [java]  
+     [java] Method ==> [createFullPerson(Person p, HealthProfile measure)]
      [java] Method# ==> [11]
-     [java] Param ==> [Firstname: Billy, Lastname: Costacurta, Birthdate: 1972-10-11, dateRegistered: 2015-12-10, measureType: weight, measureValue: 72, measureValueType: Int]
+     [java] Param ==> [Firstname: Bob, Lastname: Marley, Birthdate: 1961-10-11, dateRegistered: 2015-12-07, measureType: weight, measureValue: 85, measureValueType: Int]
      [java]  
-     [java] personId: 56
-     [java] Firstname: Billy
-     [java] Lastname: Costacurta
-     [java] Birthdate: 1972-10-11
+     [java] personId: 59
+     [java] Firstname: Bob
+     [java] Lastname: Marley
+     [java] Birthdate: 1961-10-11
      [java] *CurrentHealth*
-     [java] mid: 54
-     [java] dateRegistered: 2015-12-10
+     [java] mid: 59
+     [java] dateRegistered: 2015-12-07
      [java] measureType: weight
-     [java] measureValue: 72
+     [java] measureValue: 85
      [java] measureValueType: Int
      [java] #########################################################
      [java]  
@@ -164,7 +156,7 @@ execute.client.heroku:
      [java] Method# ==> [4]
      [java] Param ==> [Firstname: Francesco, Lastname: Totti, Birthdate: 1978-10-11]
      [java]  
-     [java] personId: 57
+     [java] personId: 60
      [java] Firstname: Francesco
      [java] Lastname: Totti
      [java] Birthdate: 1978-10-11
@@ -176,9 +168,9 @@ execute.client.heroku:
      [java]  
      [java] Method ==> [deletePerson(int id)]
      [java] Method# ==> [5]
-     [java] Param ==> [last personId in the database]
+     [java] Param ==> [personId: 60]
      [java]  
-     [java] The person with id: 57 have been deleted.
+     [java] The person with id: 60 have been deleted.
      [java]  
      [java] #########################################################
      [java]  
@@ -187,7 +179,7 @@ execute.client.heroku:
      [java]  
      [java] Method ==> [readPersonHistory(int id, String measureType)]
      [java] Method# ==> [6]
-     [java] Param ==> [personId=2, measureType=weight]
+     [java] Param ==> [personId: 2, measureType: weight]
      [java]  
      [java] mid: 2
      [java] dateRegistered: 2015-10-09
@@ -225,10 +217,9 @@ execute.client.heroku:
      [java]  
      [java] Method ==> [savePersonMeasure(int id, Measure m)]
      [java] Method# ==> [9]
-     [java] Param ==> [personId: 53, dateRegistered: 2015-12-17, measureType: weight, measureValue: 188, measureValueType: Int]
+     [java] Param ==> [personId: 51, dateRegistered: 2015-12-17, measureType: weight, measureValue: 188, measureValueType: Int]
      [java]  
-     [java] Value of mid_request9: 55
-     [java] mid: 55
+     [java] mid: 60
      [java] dateRegistered: 2015-12-17
      [java] measureType: weight
      [java] measureValue: 188
@@ -241,10 +232,9 @@ execute.client.heroku:
      [java]  
      [java] Method ==> [updatePersonMeasure(int id, Measure m)]
      [java] Method# ==> [10]
-     [java] Param ==> [personId: 53, dateRegistered: 2015-10-16, measureType: weight, measureValue: 190, measureValueType: Integer]
+     [java] Param ==> [personId: 51, dateRegistered: 2015-10-16, measureType: weight, measureValue: 190, measureValueType: Integer]
      [java]  
-     [java] mid: 55
-     [java] mid: 55
+     [java] mid: 60
      [java] dateRegistered: 2015-10-16
      [java] measureType: weight
      [java] measureValue: 190

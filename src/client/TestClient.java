@@ -58,13 +58,13 @@ public class TestClient{
         
         System.out.println(" ");
         System.out.println("#########################################################");
-        request3(people,3,"Yuri");
+        request3(people,3,"Bob");
         System.out.println("#########################################################");
         System.out.println(" ");
         
         System.out.println(" ");
         System.out.println("#########################################################");
-        request4_1(people,"Jim", "Morrison", "1958-10-11","2015-12-07","weight","62","Int"); 
+        request4_1(people,"Bob", "Marley", "1961-10-11","2015-12-07","weight","85","Int"); 
         System.out.println("#########################################################");
         System.out.println(" ");
         
@@ -101,13 +101,13 @@ public class TestClient{
         String measureTypeParam = "weight";
         System.out.println(" ");
         System.out.println("#########################################################");
-        request9(people, "2015-12-17", measureTypeParam, "188", "Int", 53);
+        request9(people, "2015-12-17", measureTypeParam, "188", "Int", 51);
         System.out.println("#########################################################");
         System.out.println(" ");
         
         System.out.println(" ");
         System.out.println("#########################################################");
-        request10(people, "2015-10-16", measureTypeParam, "190", "Integer", 53);
+        request10(people, "2015-10-16", measureTypeParam, "190", "Integer", 51);
         System.out.println("#########################################################");
         System.out.println(" ");      
     }
