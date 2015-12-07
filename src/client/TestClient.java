@@ -58,13 +58,13 @@ public class TestClient{
         
         System.out.println(" ");
         System.out.println("#########################################################");
-        request3(people,3,"Bob");
+        request3(people,3,"Micky");
         System.out.println("#########################################################");
         System.out.println(" ");
         
         System.out.println(" ");
         System.out.println("#########################################################");
-        request4_1(people,"Bob", "Marley", "1961-10-11","2015-12-07","weight","85","Int"); 
+        request4_1(people,"Bruce", "Lee", "1961-10-11","2015-12-07","weight","85","Int"); 
         System.out.println("#########################################################");
         System.out.println(" ");
         
@@ -94,7 +94,7 @@ public class TestClient{
         
         System.out.println(" ");
         System.out.println("#########################################################");
-        request8(people,3,"weight",6);
+        request8(people,2,"weight",2);
         System.out.println("#########################################################");
         System.out.println(" ");
         
